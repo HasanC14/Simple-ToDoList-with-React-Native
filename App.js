@@ -19,12 +19,6 @@ export default function App() {
     }
   };
 
-  const deleteTask = (index) => {
-    const updatedTaskList = [...taskList];
-    updatedTaskList.splice(index, 1);
-    setTaskList(updatedTaskList);
-  };
-
   return (
     <View style={styles.container}>
       <Text style={styles.heading}>Todo List</Text>
@@ -40,12 +34,9 @@ export default function App() {
       <FlatList
         data={taskList}
         keyExtractor={(item, index) => index.toString()}
-        renderItem={({ item, index }) => (
+        renderItem={({ item }) => (
           <View style={styles.taskItem}>
             <Text style={styles.taskText}>{item}</Text>
-            <TouchableOpacity onPress={() => deleteTask(index)}>
-              <Text style={styles.deleteButtonText}>Delete</Text>
-            </TouchableOpacity>
           </View>
         )}
       />
@@ -84,17 +75,9 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   taskItem: {
-    flexDirection: "row",
-    alignItems: "center",
     marginBottom: 8,
   },
   taskText: {
-    flex: 1,
     fontSize: 16,
-  },
-  deleteButtonText: {
-    color: "#ff0000",
-    fontSize: 16,
-    fontWeight: "bold",
   },
 });
